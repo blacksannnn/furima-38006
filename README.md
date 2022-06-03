@@ -21,67 +21,74 @@ Things you may want to cover:
 
 * Deployment instructions
 
-* ...
+* ..。
 
 # テーブル設計
 
 ## users テーブル
 
-| Column                | Type   | Options     |
-| ------------------    | ------ | ----------- |
-| nickname              | string | null: false |
-| email                 | string | null: false |
-| encrypted_password    | string | null: false |
-| family_name           | string | null: false |
-| first_name            | string | null: false |
-| family_name_kana      | string | null: false |
-| first_name_kana       | string | null: false |
-| birth_day             | string | null: false |
+| Column                | Type   | Options                  |
+| ------------------    | ------ | -----------              |
+| nickname              | string | null: false              |
+| email                 | string | null: false, unique:true |
+| encrypted_password    | string | null: false              |
+| family_name           | string | null: false              |
+| first_name            | string | null: false              |
+| family_name_kana      | string | null: false              |
+| first_name_kana       | string | null: false              |
+| birth_day             | date   | null: false              |
 
 ### Association
-has_many :products
+has_many :product
+has_many :purchase
+
 
 
 ## products テーブル
 
-| Column            | Type       | Options                        |
-| -------           | ---------- | ------------------------------ |
-| image             | ---------- | ------------------------------ |
-| product_name      | text       | null: false                    |
-| description       | text       | null: false                    |
-| category          | text       | null: false                    |
-| product_condition | text       | null: false                    |
-| delivery_charge   | text       | null: false                    |
-| region            | text       | null: false                    |
-| delivery_day      | text       | null: false                    |
-| price             | string     | null: false                    |
+| Column               | Type       | Options                        |
+| -------              | ---------- | ------------------------------ |
+| product_name         | string     | null: false                    |
+| description          | text       | null: false                    |
+| category_id          | integer    | null: false                    |
+| product_condition_id | integer    | null: false                    |
+| delivery_charge_id   | integer    | null: false                    |
+| prefecture_id        | integer    | null: false                    |
+| delivery_day_id      | integer    | null: false                    |
+| price                | integer    | null: false                    |
+| user                 | references | null: false, foreign_key: true |
 
 ### Association
-belongs_to :users
+belongs_to :user
+has_one :purchase
+
 
 
 ## destinations テーブル
 
-| Column         | Type       | Options                        |
-| -------        | ---------- | ------------------------------ |
-| post_code      | string     | null: false                    |
-| prefecture     | string     | null: false                    |
-| city           | string     | null: false                    |
-| adress         | string     | null: false                    |
-| building_name  | string     | null: false                    |
-| phone_number   | string     | null: false                    |
-
+| Column         | Type        | Options                        |
+| -------        | ----------  | ------------------------------ |
+| post_code      | string      | null: false                    |
+| prefecture_id  | integer     | null: false                    |
+| city           | string      | null: false                    |
+| adress         | string      | null: false                    |
+| building_name  | string      |                                |
+| phone_number   | string      | null: false                    |
+| purchase       | references  | null: false, foreign_key: true |
 
 ### Association
-has_one :purchases
+belongs_to :purchase
+
 
 
 ## purchases テーブル
 
 | Column     | Type        | Options                        |
 | ---------- | ----------- | -----------                    |
-| use        | references  | null: false, foreign_key: true |
-| products   | references  | null: false, foreign_key: true |
+| user       | references  | null: false, foreign_key: true |
+| product    | references  | null: false, foreign_key: true |
 
 ### Association
-belongs_to :destination
+belongs_to :user
+belongs_to :product
+has_one :destination
