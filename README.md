@@ -39,8 +39,8 @@ Things you may want to cover:
 | birth_day             | date   | null: false              |
 
 ### Association
-has_many :product
-has_many :purchase
+has_many :products
+has_many :purchases
 
 
 
@@ -71,7 +71,7 @@ has_one :purchase
 | post_code      | string      | null: false                    |
 | prefecture_id  | integer     | null: false                    |
 | city           | string      | null: false                    |
-| adress         | string      | null: false                    |
+| address         | string      | null: false                    |
 | building_name  | string      |                                |
 | phone_number   | string      | null: false                    |
 | purchase       | references  | null: false, foreign_key: true |
