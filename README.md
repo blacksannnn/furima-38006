@@ -27,6 +27,8 @@ Things you may want to cover:
 
 ## users テーブル
 
+##ユーザー管理機能
+
 | Column                | Type   | Options                  |
 | ------------------    | ------ | -----------              |
 | nickname              | string | null: false              |
@@ -37,6 +39,7 @@ Things you may want to cover:
 | family_name_kana      | string | null: false              |
 | first_name_kana       | string | null: false              |
 | birth_day             | date   | null: false              |
+
 
 ### Association
 has_many :products
