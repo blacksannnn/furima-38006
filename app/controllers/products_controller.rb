@@ -8,9 +8,9 @@ class ProductsController < ApplicationController
       @product = Product.new
   end 
 
-  def crete
-      @product = Product.new(prototype_params)
-      if @pproduct.save
+  def create
+      @product = Product.new(product_params)
+      if @product.save
         redirect_to root_path
       else
         render :new
@@ -18,7 +18,7 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:product_name,:description,:category_id,:product_condition_id,:prefecture_id,:delivery_charge_id,:delivery_charge_id,:delivery_charge_id,:delivery_charge_id,:delivery_charge_id,:price,).merge(user_id: current_user.id)
+    params.require(:product).permit(:product_name,:description,:category_id,:product_condition_id,:delivery_charge_id,:prefecture_id,:delivery_day_id,:price,).merge(user_id: current_user.id)
   end
   
   def message_params
