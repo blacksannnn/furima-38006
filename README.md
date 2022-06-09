@@ -95,3 +95,4 @@ belongs_to :purchase
 belongs_to :user
 belongs_to :product
 has_one :destination
+
