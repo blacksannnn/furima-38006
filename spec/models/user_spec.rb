@@ -45,13 +45,13 @@ RSpec.describe User, type: :model do
       it 'passwordが英字のみでは登録できない' do
         @user.password = 'abcabc'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password is invalid")
+        expect(@user.errors.full_messages).to include('Password is invalid')
       end
 
       it 'passwordが数字のみでは登録できない' do
         @user.password = '123123'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password is invalid")
+        expect(@user.errors.full_messages).to include('Password is invalid')
       end
 
       it '重複したemailが存在する場合は登録できない' do
