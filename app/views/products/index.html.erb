@@ -127,8 +127,8 @@
       新規投稿商品
     </div>
     <ul class='item-lists'>
-      <li class='list'>
-      <% @products.each do |product| %>
+    <% @products.each do |product| %>
+      <li class='list'>          
         <%= link_to "#" do %>
         <div class='item-img-content'>
           <%= image_tag product.image, class: "item-img" %> 
@@ -153,17 +153,9 @@
             </div>
           </div>
         </div>
-        <% end %>
-      <% end %>
-      </li>      
-        
-
-      </li>
-      <%# //商品のインスタンス変数になにか入っている場合、中身のすべてを展開できるようにしましょう %>
-
-      <%# 商品がない場合は以下のダミー商品が表示されるようにしましょう %>
-      <%# 商品がある場合は表示されないようにしましょう %>
-
+      </li>  
+    <% end %>
+      
       <% if @products.length == 0 %>
       <li class='list'>
         <%= link_to '#' do %>
@@ -184,11 +176,6 @@
       </li>
       <% end %>
 
-      
-
-      <%# //商品がある場合は表示されないようにしましょう %>
-      <%# //商品がない場合は以下のダミー商品が表示されるようにしましょう %>
-
     </ul>
   </div>
   <%# /商品一覧 %>
@@ -197,4 +184,3 @@
   <span class='purchase-btn-text'>出品する</span>
   <%= image_tag 'icon_camera.png' , size: '185x50' ,class: "purchase-btn-icon" %>
 <% end %>
-<%= render "shared/footer" %>
