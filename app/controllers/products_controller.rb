@@ -24,10 +24,23 @@ class ProductsController < ApplicationController
   end
 
   def edit
-    
+     if user_signed_in?
+      redirect_to root_path
+     else
+      render :new
+     end
   end
   
-  
+  def update
+     @product = Product.find(params[:id])
+     @product.update(product_params)
+        if @product.save
+          redirect_to root_path
+        else
+          render :edit
+        end
+  end
+
 
   def product_params
     params.require(:product).permit(:image, :product_name, :description, :category_id, :product_condition_id, :delivery_charge_id,
