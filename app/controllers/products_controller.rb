@@ -20,29 +20,23 @@ class ProductsController < ApplicationController
   end
 
   def show
-    
   end
 
   def edit
-      unless current_user == @product.user
-      redirect_to root_path
-      end
+    redirect_to root_path unless current_user == @product.user
   end
-  
+
   def update
-        if @product.update(product_params)
-          redirect_to product_path
-        else
-          render :edit
-        end
+    if @product.update(product_params)
+      redirect_to product_path
+    else
+      render :edit
+    end
   end
 
   def destroy
-        if @product.destroy
-          redirect_to root_path
-        end
+    redirect_to root_path if @product.destroy
   end
-
 
   def product_params
     params.require(:product).permit(:image, :product_name, :description, :category_id, :product_condition_id, :delivery_charge_id,
@@ -52,5 +46,4 @@ class ProductsController < ApplicationController
   def set_product
     @product = Product.find(params[:id])
   end
-
 end
