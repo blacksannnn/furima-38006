@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:edit, :show, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :contributor_confirmation, only: [:edit, :destroy]
 
   def index
     @products = Product.includes(:user).order('created_at DESC')
@@ -24,7 +25,7 @@ class ProductsController < ApplicationController
   end
 
   def edit
-    redirect_to root_path unless current_user == @product.user
+    
   end
 
   def update
@@ -36,9 +37,11 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    redirect_to root_path unless current_user == @product.user   
-    @product.destroy
-    redirect_to root_path
+    if @prototype.destroy
+      redirect_to root_path
+    else
+      redirect_to root_path
+    end
   end
 
   def product_params
@@ -48,5 +51,9 @@ class ProductsController < ApplicationController
 
   def set_product
     @product = Product.find(params[:id])
+  end
+
+  def contributor_confirmation
+    redirect_to root_path unless current_user == @product.user
   end
 end
