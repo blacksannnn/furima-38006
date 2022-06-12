@@ -20,6 +20,7 @@ class ProductsController < ApplicationController
   end
 
   def show
+    
   end
 
   def edit
@@ -35,7 +36,9 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    redirect_to root_path if @product.destroy
+    redirect_to root_path unless current_user == @product.user   
+    @product.destroy
+    redirect_to root_path
   end
 
   def product_params
