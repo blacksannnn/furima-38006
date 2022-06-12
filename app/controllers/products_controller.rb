@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:edit, :show, :update]
+  before_action :set_product, only: [:edit, :show, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :contributor_confirmation, only: [:edit, :destroy]
 
   def index
     @products = Product.includes(:user).order('created_at DESC')
@@ -24,19 +25,24 @@ class ProductsController < ApplicationController
   end
 
   def edit
-      unless current_user == @product.user
-      redirect_to root_path
-      end
-  end
-  
-  def update
-        if @product.update(product_params)
-          redirect_to product_path
-        else
-          render :edit
-        end
+    
   end
 
+  def update
+    if @product.update(product_params)
+      redirect_to product_path
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    if @product.destroy
+      redirect_to root_path
+    else
+      redirect_to root_path
+    end
+  end
 
   def product_params
     params.require(:product).permit(:image, :product_name, :description, :category_id, :product_condition_id, :delivery_charge_id,
@@ -47,4 +53,7 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
   end
 
+  def contributor_confirmation
+    redirect_to root_path unless current_user == @product.user
+  end
 end
