@@ -7,6 +7,6 @@ FactoryBot.define do
     city            { '金沢市金沢町' }
     address         { '1-1' }
     building_name   { 'kanazawa' }
-    phone_number    { '090-1111-2222'}    
+    phone_number    { '09011112222'}    
   end
 end

@@ -7,9 +7,7 @@ class PurchasesController < ApplicationController
   end
 
   def create
-
     @purchase_destination = PurchaseDestination.new(purchase_params)
-   
     if @purchase_destination.valid?
       pay_item
       @purchase_destination.save
