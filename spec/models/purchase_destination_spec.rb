@@ -1,14 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe PurchaseDestination, type: :model do
-  describe '購入送付先の保存' do
+  
   before do
-    user = FactoryBot.create(:user)
-    product = FactoryBot.create(:product)
-    @purchase_destination = FactoryBot.build(:purchase_destination, user_id: user.id, product_id: product.id)
+     user = FactoryBot.create(:user)
+     product = FactoryBot.create(:product)
+     @purchase_destination = FactoryBot.build(:purchase_destination, user_id: user.id, product_id: product.id)
   end
 
-  
+  describe '購入送付先の保存' do
     context '商品購入できる場合' do
       it '全ての項目が入力されていれば購入できること' do
         expect(@purchase_destination).to be_valid
