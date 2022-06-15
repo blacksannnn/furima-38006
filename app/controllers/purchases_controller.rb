@@ -3,11 +3,19 @@ class PurchasesController < ApplicationController
 
 
   def index
-    @purchase_destination = PurchaseDestination.new  
+    @purchase_destination = PurchaseDestination.new
+    
+   
+    if  @product.user == current_user || @product.purchase != nil
+      redirect_to root_path
+    end
+
   end
 
   def create
+
     @purchase_destination = PurchaseDestination.new(purchase_params)
+   
     if @purchase_destination.valid?
       pay_item
       @purchase_destination.save
@@ -35,5 +43,12 @@ class PurchasesController < ApplicationController
         currency: 'jpy'                 # 通貨の種類（日本円）
       )
   end
+
+
+  def edit
+    @buy_item = BuyItem.find(params[purchase_id])
+    redirect_to root_path unless current_user.id == @buy_item.user_id
+  end
+
 
 end
