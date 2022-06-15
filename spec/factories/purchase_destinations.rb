@@ -1,5 +1,6 @@
 FactoryBot.define do
   factory :purchase_destination do
+    
     token { 'tok_abcdefghijk00000000000000000' }
 
     post_code       { '123-4567' }
@@ -8,8 +9,6 @@ FactoryBot.define do
     address         { '1-1' }
     phone_number    { '09011112222' }
 
-    user_id         { 'cus_xxxxxxxxxxxxxx' }
-    product_id      { 'car_yyyyyyyyyyyyyyy' }
     
   end
 end
