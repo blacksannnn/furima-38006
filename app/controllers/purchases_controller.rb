@@ -1,15 +1,11 @@
 class PurchasesController < ApplicationController
   before_action :set_trace_func, only: [:index, :create]
-  
+  before_action :authenticate_user!  
   
 
   def index
-    @purchase_destination = PurchaseDestination.new
-    
-   
+    @purchase_destination = PurchaseDestination.new  
     if  @product.user == current_user || @product.purchase != nil
-      redirect_to root_path
-    else
       redirect_to root_path
     end    
 
