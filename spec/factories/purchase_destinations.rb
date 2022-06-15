@@ -6,11 +6,10 @@ FactoryBot.define do
     prefecture_id   { '2' }
     city            { '金沢市金沢町' }
     address         { '1-1' }
-    building_name   { 'kanazawa' }
     phone_number    { '09011112222' }
-    
+
     user_id         { 'cus_xxxxxxxxxxxxxx' }
-    purchase_id    { 'car_yyyyyyyyyyyyyyy' }
+    product_id      { 'car_yyyyyyyyyyyyyyy' }
     
   end
 end

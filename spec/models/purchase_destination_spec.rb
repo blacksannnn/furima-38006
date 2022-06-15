@@ -1,11 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe PurchaseDestination, type: :model do
+  describe '購入送付先の保存' do
   before do
-    @purchase_destination = FactoryBot.build(:purchase_destination)
+    user = FactoryBot.create(:user)
+    @purchase_destination = FactoryBot.build(:purchase_destination, user_id: user.id )
   end
 
-  describe '商品購入登録' do
+  
     context '商品購入できる場合' do
       it '全ての項目が入力されていれば購入できること' do
         expect(@purchase_destination).to be_valid
@@ -13,7 +15,7 @@ RSpec.describe PurchaseDestination, type: :model do
 
       it '建物名が空でも購入できる' do
         @purchase_destination.building_name = ''
-        expect(@dpurchase_destination).to be_valid
+        expect(@purchase_destination).to be_valid
       end
     end
 
@@ -88,13 +90,13 @@ RSpec.describe PurchaseDestination, type: :model do
       it 'userが紐付いていないと保存できない' do
         @purchase_destination.user_id = nil
         @purchase_destination.valid?
-        expect(@purchase_destination.errors.full_messages).to include('User must exist')
+        expect(@purchase_destination.errors.full_messages).to include("User can't be blank")
       end
 
       it 'productが紐付いていないと保存できない' do
         @purchase_destination.product_id= nil
         @purchase_destination.valid?
-        expect(@purchase_destination.errors.full_messages).to include('Product must exist')
+        expect(@purchase_destination.errors.full_messages).to include("Product can't be blank")
       end
 
     end
