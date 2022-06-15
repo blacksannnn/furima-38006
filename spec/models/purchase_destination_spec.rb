@@ -10,11 +10,22 @@ RSpec.describe PurchaseDestination, type: :model do
       it '全ての項目が入力されていれば購入できること' do
         expect(@purchase_destination).to be_valid
       end
+
+      it '建物名が空でも購入できる' do
+        @purchase_destination.building_name = ''
+        expect(@dpurchase_destination).to be_valid
+      end
     end
 
     context '商品購入できない場合' do
       it '郵便番号が正しく入力されていないと購入できない' do
         @purchase_destination.post_code = '123-123'
+        @purchase_destination.valid?
+        expect(@purchase_destination.errors.full_messages).to include('Post code is invalid')
+      end
+
+      it '郵便番号が半角ハイフンを含む形でなければ購入できない' do
+        @purchase_destination.post_code = '1231234'
         @purchase_destination.valid?
         expect(@purchase_destination.errors.full_messages).to include('Post code is invalid')
       end
@@ -72,6 +83,20 @@ RSpec.describe PurchaseDestination, type: :model do
         @purchase_destination.valid?
         expect(@purchase_destination.errors.full_messages).to include("Token can't be blank")
       end
+
+      
+      it 'userが紐付いていないと保存できない' do
+        @purchase_destination.user_id = nil
+        @purchase_destination.valid?
+        expect(@purchase_destination.errors.full_messages).to include('User must exist')
+      end
+
+      it 'productが紐付いていないと保存できない' do
+        @purchase_destination.product_id= nil
+        @purchase_destination.valid?
+        expect(@purchase_destination.errors.full_messages).to include('Product must exist')
+      end
+
     end
   end
 end
