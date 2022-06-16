@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_many :products
+  has_many :purchases
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -12,6 +13,7 @@ class User < ApplicationRecord
   validates :first_name_kana,  presence: true, format: { with: /\A[ァ-ヶー－]+\z/ }
   validates :birth_day,        presence: true
 
-  VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i.freeze
-  validates :password, format: { with: VALID_PASSWORD_REGEX }
+  
+  PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
+  validates_format_of :password, with: PASSWORD_REGEX, message: 'には英字と数字の両方を含めて設定してください'
 end

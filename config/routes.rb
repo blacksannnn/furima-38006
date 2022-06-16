@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
   
+  get 'purchases/index'
   devise_for :users
   root to: "products#index"
-  resources :products, only: [:new,:create,:index,:show,:edit,:update,:destroy]
+  resources :products, only: [:new,:create,:index,:show,:edit,:update,:destroy]do
+  resources :purchases, only: [:create,:index]
+  end
 
   
    

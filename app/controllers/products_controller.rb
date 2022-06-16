@@ -21,11 +21,10 @@ class ProductsController < ApplicationController
   end
 
   def show
-    
   end
 
   def edit
-    
+    redirect_to root_path if @product.purchase
   end
 
   def update
