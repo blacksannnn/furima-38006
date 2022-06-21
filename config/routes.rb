@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   root to: "products#index"
   resources :products, only: [:new,:create,:index,:show,:edit,:update,:destroy]do
   resources :purchases, only: [:create,:index]
+  resources :comments, only: [:create]
   end
 
   
